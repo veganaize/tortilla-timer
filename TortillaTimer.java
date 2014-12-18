@@ -49,9 +49,9 @@ class TortillaTimer extends JFrame implements Runnable
 	public String timeSet()
 	{
 		//-- get timer value
-		int hrs = 0// get hours
-		int min = 2// get mins
-		int sec = 0// get sec
+		int hrs = 0;// get hours
+		int min = 2;// get mins
+		int sec = 0;// get sec
 		String time = zero(hrs) + ":" + zero(min) + ":" + zero(sec);
 		return time;
 	}
@@ -80,3 +80,4 @@ class TortillaTimer extends JFrame implements Runnable
 	
 	public static void main(String[] args)
 	{ TortillaTimer tt = new TortillaTimer; }
+}
