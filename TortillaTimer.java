@@ -1,83 +1,40 @@
-import java.awt.*;
-import javax.swing.*;
-import java.util.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
-class TortillaTimer extends JFrame implements Runnable
-{
-	// Global Objects
-	Thread runner;
-	Font myFont;
-	
-	// Create Window
-	public TortillaTimer()
-	{
-		// Window Title
-		super("Tortilla Timer");
-		// Window Size
-		setSize(300, 100);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setVisible(true);
-		
-		// Create Font Instance
-		myFont = new Font("Serif", Font.BOLD, 40);
-		
-		// Components
-		Container contentArea = getContentPane();
-		
-		TimePanel timeDisplay = new TimePanel();
-		contentArea.add(timeDisplay);
-		
-		setContentPane(contentArea);
-		
-		// Start Thread Running
-		start();
-	}
-	
-	class TimePanel extends JPanel
-	{
-		public void paintComponent(Graphics painter)
-		{
-			painter.setColor(Color.white);
-			painter.fillRect(0, 0, 300, 100);
-			painter.setFont(myFont);
-			painter.setColor(Color.blue);
-//TODO:-----------------------------------
-			painter.drawString(timeSet(), 60, 40);
-		}
-	}
-	
-	public String timeSet()
-	{
-		//-- get timer value
-		int hrs = 0;// get hours
-		int min = 2;// get mins
-		int sec = 0;// get sec
-		String time = zero(hrs) + ":" + zero(min) + ":" + zero(sec);
-		return time;
-	}
-	
-	public String zero(int num)
-	{
-		String number = (num < 10) ? ("0" + num) : ("" + num);
-		return number;
-	}
-	
-	public void start()
-	{
-		if(runner == null) runner = new Thread(this);
-		runner start();
-	}
-	
-	public void run()
-	{
-		while (runner == Thread.currentThread())
-		{
-			repaint();
-			try { Thread.sleep(1000); }
-			catch(InterruptedException e) {}
-		}
-	}
-	
-	public static void main(String[] args)
-	{ TortillaTimer tt = new TortillaTimer; }
+public class TortillaTimer {
+	static int mSeconds;
+    static int mMinutes;
+    static String mName;
+    
+	public static void main(String[] args) {
+        for (int i = args.length-1; i >= 0; i--) {
+            try {
+                int n = Integer.parseInt(args[i]);
+                if (mSeconds > 0) mMinutes = n;
+                else mSeconds = n;
+                
+            } catch (NumberFormatException e) {
+                mName = args[i];
+            }
+        }
+        
+        new Timer(1000, new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                if (--mSeconds < 0) {
+                    if (--mMinutes < 0) {
+                        System.out.println("\b\b\b\bDONE!");
+                        System.exit(0);
+                    }
+                    mSeconds = 59;
+                }
+                    
+                System.out.print("\b\b\b\b\b\b"+ mMinutes +":");
+                System.out.print(mSeconds > 9 ? mSeconds : "0"+ mSeconds);
+            }
+        }).start();
+
+        if (mName != null) System.out.println(mName);        
+        while (true) {}
+    }
 }
