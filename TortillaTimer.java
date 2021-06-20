@@ -3,7 +3,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 public class TortillaTimer {
-	static int mSeconds;
+    static int mSeconds;
     static int mMinutes;
     static String mName;
     
