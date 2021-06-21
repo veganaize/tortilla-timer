@@ -6,7 +6,7 @@ public class TortillaTimer {
     static int mSeconds = -1;
     static int mMinutes = -1;
     static int mHours;
-    static String mName;
+    static String mName = "";
     
 	public static void main(String[] args) {
         
@@ -20,7 +20,7 @@ public class TortillaTimer {
                 else mSeconds = n;
                 
             } catch (NumberFormatException e) {
-                mName = args[i];
+                mName += args[i] +" ";
             }
         }
         
@@ -52,7 +52,7 @@ public class TortillaTimer {
         if (mSeconds == -1) mSeconds = 0;
         
         // Display timer name and loop until finished
-        if (mName != null) System.out.println(mName);        
+        if (mName.length() > 0) System.out.println(mName);        
         while (true) {}
     }
 }
