@@ -7,23 +7,23 @@ public class TortillaTimer {
     static int mMinutes = -1;
     static int mHours;
     static String mName = "";
-    
-	public static void main(String[] args) {
-        
+
+    public static void main(String[] args) {
+
         // Process command line arguments
         for (int i = args.length-1; i >= 0; i--) {
             try {
                 int n = Integer.parseInt(args[i]);
-                
+
                 if (mMinutes > -1) mHours = n;
                 else if (mSeconds > -1) mMinutes = n;
                 else mSeconds = n;
-                
+
             } catch (NumberFormatException e) {
                 mName += args[i] +" ";
             }
         }
-        
+
         // Decrement and display timer
         new Timer(1000, new ActionListener() {
             public void actionPerformed(ActionEvent event) {
@@ -38,7 +38,7 @@ public class TortillaTimer {
                     }
                     mSeconds = 59;
                 }
-                    
+
                 System.out.print("\b\b\b\b\b\b\b\b\b         \b\b\b\b\b\b\b\b\b");
                 System.out.print(mHours +":");
                 System.out.print(mMinutes > 9 ? mMinutes : "0"+mMinutes);
@@ -50,9 +50,9 @@ public class TortillaTimer {
         // Initialize any uninitialized values
         if (mMinutes == -1) mMinutes = 0;
         if (mSeconds == -1) mSeconds = 0;
-        
+
         // Display timer name and loop until finished
-        if (mName.length() > 0) System.out.println(mName);        
+        if (mName.length() > 0) System.out.println(mName);
         while (true) {}
     }
 }
